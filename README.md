@@ -1,116 +1,116 @@
-# ⚡ Coin Master Auto-Pilot Engine v2.0
+# ⚡ Coin Master Auto-Pilot (Android)
 
-> **Ultra-high-throughput Fastify server + Sleek Minimalist Mobile/Web Auto-Collector**  
-> Inspired by the clean, minimal aesthetic of Lastwave and the high concurrency capabilities of Fastify.
-
----
-
-## 📁 Architecture Overview
-
-This project is cleanly divided into two core components:
-
-```
-coin-master/
-├── server/                    # 🚀 High-Throughput Fastify Engine
-│   ├── server.js              # Fastify core (Brotli/Gzip, Helmet, Rate Limiter, In-Memory ETag Cache)
-│   ├── cluster.js             # Multi-core clustering (scales to 1,000,000 req/sec)
-│   ├── crawler.js             # Multi-source parallel drop crawler (faster than Levvel)
-│   ├── auto-claimer.js        # Smartphone CMD / ADB Controller with emergency stop
-│   ├── Dockerfile             # Multi-stage Alpine container (10GB RAM optimized)
-│   ├── docker-compose.yml     # Production resource limits (10GB RAM, 4 CPU cores)
-│   ├── vercel.json            # Vercel Serverless edge configuration
-│   ├── api/index.js           # Serverless entrypoint
-│   └── start.bat              # 1-click Windows launcher
-│
-└── app/                       # 📱 Minimalist Client Application
-    ├── public/
-    │   ├── index.html         # Modern Lastwave-inspired minimal dark UI
-    │   ├── style.css          # Frosted glassmorphism, glowing accents, responsive
-    │   ├── app.js             # Dual-engine collector: ADB CMD + Mobile Web Intent
-    │   └── manifest.json      # PWA installable manifest
-    └── README.md              # Client app usage & mobile pairing instructions
-```
+> **Autonomous, Standalone Free Spin & Coin Collector for Coin Master**  
+> Built with **Flutter**, **Dart**, and native **Android Accessibility Services**.  
+> **100% Standalone**: Runs directly on your Android phone with zero PC or laptop server required.
 
 ---
 
-## 🌟 Key Features
+<p align="center">
+  <img src="app_icon_512.png" width="140" height="140" alt="Coin Master Auto-Pilot Icon" style="border-radius: 28px;" />
+</p>
 
-### 1. Ultra-High-Throughput Fastify Server
-- **1M Req/sec Architecture**: Built on **Fastify v5**, Node.js native clustering (`cluster.js`), and in-memory O(1) hash maps with MD5 weak ETags returning instant HTTP `304 Not Modified` responses.
-- **Microsecond In-Memory Storage**: Zero disk I/O on `/api/spins` queries; drops are served straight from RAM.
-- **Enterprise Security Hardening**:
-  - `@fastify/helmet`: Hardened Content-Security-Policy (CSP), clickjacking defense (`frame-ancestors: 'self'`), MIME sniffing protection (`X-Content-Type-Options: nosniff`).
-  - `@fastify/rate-limit`: Distributed rate-limiting against DDoS and brute-force spikes.
-  - `@fastify/cors`: Strict origin and headers validation.
-  - Parameter Sanitization: Strict regex validation (`^[a-zA-Z0-9_\-\.\:\=]{3,128}$`) protecting against command injection into ADB / smartphone shell commands.
-  - `@fastify/compress`: Brotli and Gzip automatic payload compression.
-- **Cloud & Container Ready**:
-  - **Docker & Docker Compose**: Configured with 10GB RAM reservation and multi-core CPU scaling (`--max-old-space-size=8192`).
-  - **Vercel Serverless**: `vercel.json` with Edge Cache headers (`s-maxage=60, stale-while-revalidate=300`).
-
-### 2. Multi-Source Drop Crawler (Faster than Levvel)
-- Scrapes & aggregates from **5 concurrent sources**:
-  1. `coinmaster-daily.com`: Resolves 25-30 live redirect links simultaneously with `Promise.allSettled`.
-  2. **Official Moon Active Algorithmic Drops**: Probes Facebook, Instagram, Twitter/X, WhatsApp, and Story campaign patterns (`pe_FCB...`, `pe_INS...`, `pe_TWI...`, etc.).
-  3. `freespinandcoin.blogspot.com`: Scrapes community feeds.
-  4. **Telegram Public Drop Feeds**: Aggregates `@coinmasterfreespinlink` and `@coinmasterspins`.
-  5. **Levvel Fallback & Mirror**: Continuous background sync.
-- **5-Minute Auto-Sync**: Background cron continuously pulls fresh drops without blocking any incoming client HTTP requests.
-
-### 3. Smartphone CMD Automation & In-Game Protection
-- **Pre-Flight Checklist**: A clean checklist reminds users to launch Coin Master and dismiss all startup popups (event wheels, sale banners, raid summaries) before collecting.
-- **Sequential 1-by-1 Collector**: Collects all unclaimed drops (e.g. 28 drops) with an adjustable delay (default **4 seconds**).
-- **Persistent Floating Notification / Player Bar**:
-  - Modeled after Lastwave's persistent audio player.
-  - Live progress display: `Collecting [3/28] • 4s delay • 25 Free Spins`.
-  - Smooth animated progress bar.
-  - **Prominent Emergency STOP Button**: If an in-game popup says *"This offer has ended"* or *"Already claimed"*, tap **STOP** right on the notification bar to immediately abort the sequence.
-- **Dual Execution Modes**:
-  - **Mode A (ADB / Smartphone CMD)**: Controls your phone directly over USB or Wireless ADB using `am start -a android.intent.action.VIEW -d "coinmaster://promotions?c=..."`.
-  - **Mode B (Mobile Browser Direct)**: Open the web app on Chrome on Android; it triggers internal deep links with 4s delay and zero extra browser tabs!
+<p align="center">
+  <a href="https://flutter.dev"><img src="https://img.shields.io/badge/Platform-Flutter%203.x-02569B?logo=flutter" alt="Flutter" /></a>
+  <a href="https://dart.dev"><img src="https://img.shields.io/badge/Language-Dart%20%7C%20Kotlin-0175C2?logo=dart" alt="Dart & Kotlin" /></a>
+  <a href="https://developer.android.com"><img src="https://img.shields.io/badge/Android-5.0%20to%2016%2B-3DDC84?logo=android" alt="Android Support" /></a>
+  <a href="https://github.com/vivek3658/coin-master-free-spin-collect-automation/releases"><img src="https://img.shields.io/badge/Release-v2.5.0-F59E0B" alt="Release" /></a>
+</p>
 
 ---
 
-## 🚀 Quick Start
+## 🌟 What Is Coin Master Auto-Pilot?
 
-### Option 1: Local Windows Runner
-1. Navigate to `server` folder:
-   ```bash
-   cd server
-   npm start
-   ```
-   *(Or simply double-click `start.bat`)*
-2. Open in your browser:
-   - On PC: [http://localhost:3000](http://localhost:3000)
-   - On Phone (same Wi-Fi): `http://<YOUR-PC-IP>:3000`
+Collecting daily free spins for Coin Master manually is tedious—it usually requires navigating ad-filled blog websites (like Levvvel) and clicking 25+ reward links one by one.
 
-### Option 2: Multi-Core Cluster Mode (High Throughput)
+**Coin Master Auto-Pilot** completely automates this process directly on your Android device:
+1. **1-Tap Autonomous Collection**: Launches each official reward drop sequentially, detects the in-game reward popup using native Android Accessibility, and clicks **"Collect"** with a safe 4-second delay.
+2. **100% Official Drops Only**: Connects directly to official Moon Active sources (verified `@CoinMasterGame` Twitter syndication & algorithmic daily campaign codes). **Zero third-party scraper websites used.**
+3. **Offer-Ended & 48h Expiration Filter**: Moon Active reward links expire after ~48 hours. The app automatically filters out drops older than 48 hours and automatically dismisses any "This offer is ended" popups without freezing.
+4. **Auto-Scan on Open**: Refreshes and loads today's freshest spin drops whenever you open or resume the app.
+5. **Skeuomorphic Retro Arcade UI**: Golden 3D Collect button, illuminated convex green/amber status LEDs, retro segment progress bar, real-time executing ticker, and emergency Ruby Red Force-Stop control.
+
+---
+
+## 📱 Screenshots
+
+<p align="center">
+  <img src="rewardpilot_top_clean.png" width="360" alt="Dashboard Screen" style="border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.5);" />
+</p>
+
+---
+
+## ⚙️ How It Works (Engineering Details)
+
+- **Official URL Scheme Routing**: Uses `coinmaster://promotions?c=...` deep-linking to launch directly into Coin Master's native GameActivity, bypassing browser tabs and avoiding Amazon S3 403 errors.
+- **Screen Recognition State Machine**: Real-time accessibility node inspection classifies in-game screens into:
+  - `claimButtonAvailable` → Activates the "Collect" button.
+  - `rewardExpired` ("This offer has ended") → Clicks "OK" to dismiss dialog and advances to the next drop.
+  - `rewardAlreadyClaimed` → Clicks "OK" to dismiss and advances.
+  - `unknownScreen` (In-game events, wheels, slot popups) → Bounded 4-second delay allows you to clear in-game banners without the queue locking or pausing.
+- **Strict Chronological Sorting**: Prioritizes `Today` drops first so fresh, active "Collect" rewards are redeemed before older links.
+- **Manual Retesting Mode**: Includes an instant `RESET ALL CLAIMED` button and individual `Unmark` buttons so you can re-test the entire collection sequence at any time.
+
+---
+
+## 🔒 Important: Keeping the Accessibility Service Persistent
+
+On many Android devices—especially **Vivo (Funtouch OS / OriginOS)**, **Xiaomi (HyperOS / MIUI)**, and **Samsung (One UI)**—the operating system aggressively kills background accessibility services to save battery.
+
+Follow these 3 quick steps during first-time setup so Android **never automatically turns off the service**:
+
+### 1. Enable Accessibility Service
+1. Open **Coin Master Auto-Pilot**.
+2. Tap the top bar pill (**ENABLE SERVICE** or **PERSISTENT**).
+3. Select **Coin Master Auto-Pilot** in Accessibility Settings and toggle it **ON**.
+> *Note for Android 13/14/15/16*: If your phone shows *"Restricted setting"*, go to **Phone Settings → Apps → Coin Master Auto-Pilot → Tap 3 dots (top right) → "Allow restricted settings"**, then turn on Accessibility.
+
+### 2. Disable Battery Optimization (Doze Mode)
+1. In the app's Accessibility Guide, tap **"Keep Service Active (Disable Battery Optimization)"**.
+2. When the system prompt appears, choose **"Allow" / "Don't optimize" / "Unrestricted"**.
+*(Or manually: Phone Settings → Battery → Battery Optimization → Coin Master Auto-Pilot → Set to "Unrestricted").*
+
+### 3. Lock App in Recent Apps (Vivo / Xiaomi / Samsung)
+1. Open your phone's App Switcher / Recent Apps screen.
+2. Long-press or swipe down on the **Coin Master Auto-Pilot** card.
+3. Tap the **Lock icon (🔒)**. This tells Android's memory killer never to clear the app from RAM.
+4. *(Xiaomi / Vivo only)*: In App Info, toggle **Auto-start** to **ON**.
+
+---
+
+## 📥 Download Prebuilt APK
+
+Download the latest signed APK directly from the [Releases](https://github.com/vivek3658/coin-master-free-spin-collect-automation/releases) page:
+
+- **`CoinMaster-AutoPilot-Universal.apk`**: Compatible with **all** Android devices (ARM64, ARMv7, x86_64).
+- **`CoinMaster-AutoPilot-arm64.apk`**: Optimized for modern 64-bit phones (Snapdragon, MediaTek, Exynos, Tensor).
+
+---
+
+## 🛠️ Building from Source
+
+### Prerequisites
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) (v3.19 or higher)
+- Android SDK (API 21 to 36)
+- Java 11 or 17
+
+### Build Commands
 ```bash
-cd server
-npm run start:cluster
-```
+# Clone the repository
+git clone https://github.com/vivek3658/coin-master-free-spin-collect-automation.git
+cd coin-master-free-spin-collect-automation
 
-### Option 3: Docker (with 10GB RAM allocation)
-```bash
-cd server
-docker-compose up -d --build
-```
+# Fetch Flutter dependencies
+flutter pub get
 
-### Option 4: Deploy to Vercel
-```bash
-cd server
-vercel --prod
+# Run unit tests
+flutter test
+
+# Build release APK
+flutter build apk --release
 ```
 
 ---
 
-## 🔒 Security Summary
-
-| Attack Vector | Defense Implemented |
-|---|---|
-| **DDoS / Request Flooding** | `@fastify/rate-limit` sliding window per IP + Vercel Edge Cache |
-| **Command Injection (ADB/Shell)** | Strict regex whitelist on all promo codes, parameters, and device IDs |
-| **Cross-Site Scripting (XSS)** | `@fastify/helmet` CSP + strict HTML output encoding |
-| **Clickjacking** | `frame-ancestors: 'self'` via HTTP headers |
-| **Directory Traversal** | `@fastify/static` sandboxed root resolution |
-| **Bandwidth Exhaustion** | Brotli & Gzip compression + ETag HTTP 304 caching |
+## 📄 License
+This project is open-source under the MIT License.
