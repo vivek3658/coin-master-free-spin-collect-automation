@@ -82,8 +82,8 @@ Follow these 3 quick steps during first-time setup so Android **never automatica
 
 Download the latest signed APK directly from the [Releases](https://github.com/vivek3658/coin-master-free-spin-collect-automation/releases) page:
 
-- **`CoinMaster-AutoPilot-Universal.apk`**: Compatible with **all** Android devices (ARM64, ARMv7, x86_64).
-- **`CoinMaster-AutoPilot-arm64.apk`**: Optimized for modern 64-bit phones (Snapdragon, MediaTek, Exynos, Tensor).
+- **`CoinMaster-AutoPilot-arm64.apk` (Recommended, ~29 MB)**: Highly optimized for modern 64-bit Android smartphones (Snapdragon, MediaTek, Exynos, Tensor). Fast install and compact size.
+- **`CoinMaster-AutoPilot-Universal.apk` (Legacy Fallback, ~76 MB)**: Universal fat binary including 32-bit (ARMv7) and emulator (x86_64) architectures.
 
 ---
 
