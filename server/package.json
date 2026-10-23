@@ -1,0 +1,23 @@
+{
+  "name": "coinmaster-fastify-engine",
+  "version": "2.0.0",
+  "description": "High-throughput Fastify Coin Master reward tracker, crawler, and smartphone CMD auto-collector",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:cluster": "node cluster.js",
+    "crawl": "node -e \"require('./crawler').crawlAll().then(console.log)\"",
+    "claim": "node -e \"require('./auto-claimer').startAutoClaim()\""
+  },
+  "dependencies": {
+    "@fastify/compress": "^9.2.2",
+    "@fastify/cors": "^11.3.1",
+    "@fastify/helmet": "^13.2.0",
+    "@fastify/rate-limit": "^11.2.1",
+    "@fastify/static": "^10.1.7",
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
+    "fastify": "^5.12.7",
+    "node-cron": "^3.0.3"
+  }
+}

@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  coinmaster-fastify:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: coinmaster-fastify-engine
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+      - WEB_CONCURRENCY=4
+      - NODE_OPTIONS=--max-old-space-size=8192
+    volumes:
+      - ./data:/app/data
+    deploy:
+      resources:
+        limits:
+          cpus: '4.00'
+          memory: 10G
+        reservations:
+          cpus: '1.00'
+          memory: 1G
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 3

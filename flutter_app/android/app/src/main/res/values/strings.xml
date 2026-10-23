@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RewardPilot</string>
+    <string name="accessibility_service_description">RewardPilot accessibility service assists users with autonomous Coin Master reward collection. It detects reward dialogs, activates the Collect button for eligible spins and coins, and clicks OK to dismiss dialogs when links are expired or already claimed. No sensitive data or credentials are read, transmitted, or stored.</string>
+</resources>
